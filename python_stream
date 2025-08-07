@@ -1,0 +1,431 @@
+import streamlit as st
+import graphviz
+
+# --- Page Configuration ---
+st.set_page_config(
+    page_title="MDDA Integrated System",
+    page_icon="🤖",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
+# --- Custom CSS for Styling ---
+def local_css():
+    st.markdown("""
+    <style>
+    /* Core layout and theme */
+    .stApp {
+        background-color: #0a101f;
+        color: #e2e8f0;
+    }
+    
+    /* Sidebar styling */
+    [data-testid="stSidebar"] {
+        background-color: rgba(15, 23, 42, 0.8);
+        backdrop-filter: blur(5px);
+    }
+    [data-testid="stSidebar"] .st-emotion-cache-1629p8f a {
+        color: #94a3b8;
+    }
+    [data-testid="stSidebar"] .st-emotion-cache-1629p8f a:hover {
+        color: #e2e8f0;
+        background-color: #1e293b;
+    }
+
+    /* Main content styling */
+    .main .block-container {
+        padding-top: 2rem;
+    }
+    
+    h1, h2, h3 {
+        font-weight: 700;
+    }
+
+    h1 {
+        background: -webkit-linear-gradient(45deg, #3b82f6, #10b981);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    
+    h2 {
+        color: #60a5fa;
+        border-bottom: 2px solid #1e293b;
+        padding-bottom: 0.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Glassmorphism Card Effect */
+    .glass-card {
+        background: rgba(30, 41, 59, 0.5);
+        backdrop-filter: blur(10px);
+        border-radius: 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 2rem;
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        height: 100%;
+        transition: all 0.3s ease;
+    }
+    
+    .glass-card:hover {
+        border-color: rgba(59, 130, 246, 0.5);
+    }
+
+    /* Metric card styling */
+    [data-testid="stMetric"] {
+        background-color: rgba(255, 255, 255, 0.05);
+        border-radius: 0.5rem;
+        padding: 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    [data-testid="stMetricLabel"] {
+        font-weight: 600;
+    }
+
+    /* Expander styling */
+    .st-emotion-cache-p5msec {
+        background-color: rgba(30, 41, 59, 0.7);
+        border-radius: 0.5rem;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+# --- Reusable Glass Card Component ---
+def glass_card(content_func):
+    """A wrapper to create a glassmorphism container."""
+    st.markdown('<div class="glass-card">', unsafe_allow_html=True)
+    content_func()
+    st.markdown('</div>', unsafe_allow_html=True)
+
+# --- Page Definitions ---
+
+def home_page():
+    st.title("MDDA Integrated Infrastructure Development System")
+    st.markdown("""
+    <p style='font-size: 1.25rem; color: #cbd5e1; text-align: center; max-width: 800px; margin: auto;'>
+    An AI-Powered ecosystem for Building Approval, Road Construction, Property Development, Enforcement, HR, and Budgeting.
+    </p>
+    """, unsafe_allow_html=True)
+    st.markdown("---")
+    st.info("Select a section from the sidebar to explore the system.", icon="👈")
+
+def philosophy_page():
+    st.header("System Integration Philosophy")
+    st.subheader("Integrated Core Functions Ecosystem")
+
+    # Graphviz diagram for the core ecosystem
+    graph = graphviz.Digraph()
+    graph.attr(bgcolor='transparent', rankdir='TB', size='8,5')
+    graph.attr('node', shape='box', style='rounded,filled', fillcolor='#1e293b', fontname='Inter', fontcolor='#e2e8f0', color='#3b82f6')
+    graph.attr('edge', color='#60a5fa', fontname='Inter', fontcolor='#94a3b8', fontsize='10')
+
+    graph.node('A', 'Building Approvals\nRevenue Stream 1', color='#3b82f6')
+    graph.node('B', 'Road Construction\nEnhanced Infrastructure', color='#10b981')
+    graph.node('C', 'Property Development\nRevenue Stream 2', color='#f59e0b')
+    graph.node('D', 'Case Work & Enforcement\nRevenue Stream 3', color='#06b6d4')
+
+    graph.edge('A', 'B', label='Funds')
+    graph.edge('B', 'C', label='Enhances Value')
+    graph.edge('C', 'D', label='Is Enforced By')
+    graph.edge('D', 'A', label='Is Triggered By')
+    
+    st.graphviz_chart(graph, use_container_width=True)
+    st.markdown("<p style='text-align: center; font-size: 1.2rem; color: #60a5fa; font-weight: bold;'>Continuous Cycle of Growth, Compliance & Revenue</p>", unsafe_allow_html=True)
+
+
+def core_functions_page():
+    st.header("Master Coordination Agent: Core Functions")
+    
+    cols = st.columns(3)
+    with cols[0]:
+        with st.container():
+            st.markdown("### <span style='color:#3b82f6;'>Revenue Stream Management</span>", unsafe_allow_html=True)
+            st.code("""
+Integrated Revenue Flow:
+├── Building Approval Fee Collection
+├── Property Development Revenue Tracking
+├── Compounding Fee Collection
+├── Cross-Vertical Investment Strategies
+├── ROI Maximization Across All Functions
+└── Integrated Profit Center Management
+            """, language='python')
+    with cols[1]:
+        with st.container():
+            st.markdown("### <span style='color:#10b981;'>Strategic Development Intelligence</span>", unsafe_allow_html=True)
+            st.code("""
+Comprehensive Development Framework:
+├── Prime Land Identification for MDDA
+├── Building Approval Hotspot Analysis
+├── Infrastructure Priority Matrix
+├── Property Market Demand Assessment
+├── Competitive Pricing Strategy
+└── Development Timeline Synchronization
+            """, language='python')
+    with cols[2]:
+        with st.container():
+            st.markdown("### <span style='color:#f59e0b;'>Cross-Vertical Financial Intelligence</span>", unsafe_allow_html=True)
+            st.code("""
+Economic Ecosystem Optimization:
+├── Revenue Stream Analysis (All Verticals)
+├── Cross-Investment Opportunity ID
+├── Infrastructure ROI on Property Values
+├── Market Timing Optimization
+├── Budget Allocation Across Functions
+└── Risk Management Portfolio Approach
+            """, language='python')
+
+def agents_overview_page():
+    st.header("The 4 Core Verticals & 2 Supporting Modules")
+    
+    st.subheader("Core Verticals")
+    cols = st.columns(4)
+    with cols[0]:
+        glass_card(lambda: st.markdown("""<h3 style="color:#3b82f6;">Building Approvals (6)</h3><ul style="font-size:0.9rem;"><li>Visual Site Analysis</li><li>AI Floor Plan Generation</li><li>Document Intelligence</li><li>Drawing Analysis</li><li>Citizen Assistance Chatbot</li><li>Predictive Analytics</li></ul>""", unsafe_allow_html=True))
+    with cols[1]:
+        glass_card(lambda: st.markdown("""<h3 style="color:#10b981;">Road Construction (3)</h3><ul style="font-size:0.9rem;"><li>Smart Road Assessment</li><li>Construction Intelligence</li><li>Financial Intelligence</li></ul>""", unsafe_allow_html=True))
+    with cols[2]:
+        glass_card(lambda: st.markdown("""<h3 style="color:#f59e0b;">Property Development (4)</h3><ul style="font-size:0.9rem;"><li>Development Planning</li><li>Intelligent Property Design</li><li>Sales & Marketing</li><li>Portfolio Management</li></ul>""", unsafe_allow_html=True))
+    with cols[3]:
+        glass_card(lambda: st.markdown("""<h3 style="color:#06b6d4;">Case Work & Enforcement (6)</h3><ul style="font-size:0.9rem;"><li>Violation Detection</li><li>Case Management</li><li>Hearing Management</li><li>Compounding & Penalty</li><li>Enforcement & Compliance</li><li>Appeals & Review</li></ul>""", unsafe_allow_html=True))
+
+    st.markdown("---")
+    st.subheader("Supporting Modules")
+    cols = st.columns(2)
+    with cols[0]:
+        glass_card(lambda: st.markdown("""<h3 style="color:#ec4899;">Human Resources (5)</h3><ul style="font-size:0.9rem;"><li>AI-Powered HR Intelligence</li><li>Smart Leave & Attendance</li><li>Career Development</li><li>Retirement & Benefits</li><li>Training & Skill Development</li></ul>""", unsafe_allow_html=True))
+    with cols[1]:
+        glass_card(lambda: st.markdown("""<h3 style="color:#8b5cf6;">Budget Management (4)</h3><ul style="font-size:0.9rem;"><li>Master Budget Intelligence</li><li>Revenue Optimization</li><li>Expenditure Management</li><li>Financial Reporting</li></ul>""", unsafe_allow_html=True))
+
+def agent_details_page():
+    st.header("Agent Deep Dive: Enhanced Capabilities")
+    with st.expander("Enhanced Building Approval Agents", expanded=True):
+        st.markdown("<p style='color:#3b82f6; font-weight:bold;'>Agents now assess road conditions, predict traffic impact, and identify sites for MDDA's own development projects, integrating market value analysis directly into the approval process.</p>", unsafe_allow_html=True)
+    with st.expander("Enhanced Road Construction Agents"):
+        st.markdown("<p style='color:#10b981; font-weight:bold;'>Agents prioritize road development based on building approval hotspots and MDDA's own property locations, sharing resources and aligning timelines with other verticals for maximum efficiency.</p>", unsafe_allow_html=True)
+    with st.expander("Property Development & Sales Agents"):
+        st.markdown("<p style='color:#f59e0b; font-weight:bold;'>A new vertical to identify prime development land, optimize property design for ROI, manage construction, and run intelligent sales & marketing campaigns, leveraging MDDA's unique infrastructure advantages.</p>", unsafe_allow_html=True)
+
+def casework_module_page():
+    st.header("Core Vertical: Case Work & Enforcement Module")
+    st.markdown("A complete judicial and enforcement system with 6 specialized agents to manage violation detection, case management, hearings, and compliance.")
+    
+    cols = st.columns(3)
+    agents = {
+        "Violation Detection Agent": "AI-powered satellite & IoT monitoring for unauthorized construction.",
+        "Case Management Agent": "Automated case registration, document generation, and timeline tracking.",
+        "Hearing Management Agent": "Digital hearing rooms with AI legal research and decision support.",
+        "Compounding & Penalty Agent": "Smart eligibility assessment and dynamic, market-based penalty calculation.",
+        "Enforcement & Compliance Agent": "Automated stop-work orders and real-time compliance monitoring.",
+        "Appeals & Review Agent": "Multi-tier appeals management with quality assurance and consistency analysis."
+    }
+    
+    for i, (agent, desc) in enumerate(agents.items()):
+        with cols[i % 3]:
+            glass_card(lambda agent=agent, desc=desc: st.markdown(f"<h4 style='color:#06b6d4;'>{agent}</h4><p style='font-size:0.9rem;'>{desc}</p>", unsafe_allow_html=True))
+
+    st.markdown("---")
+    st.subheader("Workflow 5: 21-Day Violation Resolution")
+    st.code("""
+Key Integration Points:
+Violation Detection → Revenue Optimization → Budget Allocation → HR Resource Assignment 
+→ Hearing Management → Decision Support → Enforcement → Compliance Tracking 
+→ Revenue Collection
+    """, language='json')
+    
+def hr_module_page():
+    st.header("Supporting Module: Human Resources")
+    cols = st.columns(2)
+    with cols[0]:
+        glass_card(lambda: st.markdown("""
+        <h3 style="color:#ec4899;">AI-Powered HR Intelligence</h3>
+        <p>Manages the entire employee lifecycle, from recruitment to retirement, using analytics for workforce planning, skill gap analysis, and predicting attrition risk.</p>
+        """, unsafe_allow_html=True))
+    with cols[1]:
+        glass_card(lambda: st.markdown("""
+        <h3 style="color:#ec4899;">Smart Automation Agents</h3>
+        <p>Automates leave and attendance, manages career development based on performance data, and handles all retirement and benefits administration, ensuring compliance and efficiency.</p>
+        """, unsafe_allow_html=True))
+
+def budget_module_page():
+    st.header("Supporting Module: Budget Management")
+    cols = st.columns(2)
+    with cols[0]:
+        glass_card(lambda: st.markdown("""
+        <h3 style="color:#8b5cf6;">Master Budget Intelligence</h3>
+        <p>Provides comprehensive budget planning, real-time tracking, and optimization across all MDDA verticals, using predictive analytics for forecasting and resource allocation.</p>
+        """, unsafe_allow_html=True))
+    with cols[1]:
+        glass_card(lambda: st.markdown("""
+        <h3 style="color:#8b5cf6;">Financial Control & Reporting</h3>
+        <p>Optimizes revenue collection with dynamic pricing, controls expenditures with automated workflows and budget limits, and ensures regulatory compliance with automated financial reporting.</p>
+        """, unsafe_allow_html=True))
+
+def communication_page():
+    st.header("Inter-Agent Communication Protocols")
+
+    graph = graphviz.Digraph()
+    graph.attr(bgcolor='transparent', rankdir='TB', size='8,5', layout='neato')
+    graph.attr('node', shape='circle', style='filled', fillcolor='#1e293b', fontname='Inter', fontcolor='#e2e8f0', fixedsize='true', width='2.5')
+    graph.attr('edge', color='#475569')
+
+    graph.node('A', 'Building\nApprovals', color='#3b82f6', pos='5,8!')
+    graph.node('B', 'Road\nConstruction', color='#10b981', pos='8,5!')
+    graph.node('C', 'Property\nDevelopment', color='#f59e0b', pos='5,2!')
+    graph.node('D', 'Case Work &\nEnforcement', color='#06b6d4', pos='2,5!')
+    
+    graph.edge('A', 'B')
+    graph.edge('B', 'C')
+    graph.edge('C', 'D')
+    graph.edge('D', 'A')
+
+    st.graphviz_chart(graph, use_container_width=True)
+    
+    st.subheader("Sample Communication Payloads")
+    
+    tab1, tab2, tab3, tab4 = st.tabs(["Building Approval", "Violation Detected", "Property Development", "Market Analysis"])
+
+    with tab1:
+        st.json({
+            "trigger_event": "building_approval_granted",
+            "data_shared": {
+                "location_coordinates": "[lat, lon]",
+                "building_type": "residential/commercial",
+                "revenue_generated": "approval_fees_collected"
+            },
+            "receiving_agents": ["road_assessment", "case_work_detection"],
+            "action_required": "assess_impact_and_monitor_compliance"
+        })
+    with tab2:
+        st.json({
+            "trigger_event": "violation_detected",
+            "data_shared": {
+                "case_id": "CASE-12345",
+                "violation_type": "unauthorized_construction",
+                "estimated_penalty": "₹5,00,000"
+            },
+            "receiving_agents": ["compounding_penalty", "budget_management", "hr_management"],
+            "action_required": "initiate_judicial_process_and_allocate_resources"
+        })
+    with tab3:
+        st.json({
+            "trigger_event": "property_development_planned",
+            "data_shared": {
+                "development_location": "project_coordinates",
+                "infrastructure_requirements": "road_utilities_needed",
+                "expected_roi": "projected_returns"
+            },
+            "receiving_agents": ["road_construction", "building_approval"],
+            "action_required": "prioritize_infrastructure_for_mdda_properties"
+        })
+    with tab4:
+        st.json({
+            "trigger_event": "market_analysis_update",
+            "data_shared": {
+                "demand_trends": "residential_commercial_demand",
+                "infrastructure_impact": "road_quality_effect_on_prices"
+            },
+            "receiving_agents": ["all_development_agents"],
+            "action_required": "update_strategic_priorities"
+        })
+
+def dashboard_page():
+    st.header("Unified Command Center Dashboard")
+    
+    cols = st.columns(3)
+    with cols[0]:
+        st.metric(label="Building Approvals (Live)", value="1,284")
+        st.metric(label="Compounding Fees (Annual)", value="₹12.5 Cr")
+        st.metric(label="Case Resolution", value="95%", delta="within 21 Days")
+    with cols[1]:
+        st.metric(label="Road Construction Progress", value="87%")
+        st.metric(label="HR Productivity", value="+45%")
+        st.metric(label="Citizen Satisfaction", value="4.8 / 5")
+    with cols[2]:
+        st.metric(label="Property Sales (YTD)", value="₹126 Cr")
+        st.metric(label="Budget Accuracy", value="90%")
+        st.metric(label="Infrastructure ROI", value="+50%")
+
+def workflows_page():
+    st.header("Strategic Integration Workflows")
+    cols = st.columns(3)
+    with cols[0]:
+        glass_card(lambda: st.markdown("""<h3 style="color:#3b82f6;">Revenue-Driven Development</h3><ol style="font-size:0.9rem;"><li>Analyze revenue</li><li>Assess ROI</li><li>ID land opportunities</li><li>Prioritize infrastructure</li><li>Launch projects</li><li>Market advantages</li><li>Reinvest</li></ol>""", unsafe_allow_html=True))
+    with cols[1]:
+        glass_card(lambda: st.markdown("""<h3 style="color:#10b981;">Market-Driven Planning</h3><ol style="font-size:0.9rem;"><li>Monitor market</li><li>ID clusters</li><li>Fast-track infra</li><li>Plan projects</li><li>Coordinate timelines</li><li>Launch marketing</li><li>Optimize pricing</li></ol>""", unsafe_allow_html=True))
+    with cols[2]:
+        glass_card(lambda: st.markdown("""<h3 style="color:#06b6d4;">Violation Resolution</h3><ol style="font-size:0.9rem;"><li>AI detection & registration</li><li>Investigation & evidence</li><li>Hearing & decision</li><li>Enforcement & compounding</li><li>Compliance monitoring</li><li>Case closure</li></ol>""", unsafe_allow_html=True))
+
+def implementation_page():
+    st.header("Implementation Strategy")
+    cols = st.columns(3)
+    with cols[0]:
+        glass_card(lambda: st.markdown("""<h3 style="color:#3b82f6;">Phase 1: Foundation (4-5 months)</h3><ul style="font-size:0.9rem;"><li>Deploy unified communication & data architecture.</li><li>Integrate core systems (Approval, Road, Property).</li><li>Launch integrated citizen portal.</li><li>Deploy basic HR, Budget & Case Work modules.</li></ul>""", unsafe_allow_html=True))
+    with cols[1]:
+        glass_card(lambda: st.markdown("""<h3 style="color:#10b981;">Phase 2: AI Enhancement (5-6 months)</h3><ul style="font-size:0.9rem;"><li>Deploy all AI agents across all 6 verticals.</li><li>Implement predictive analytics for integrated planning.</li><li>Launch first AI-driven MDDA property projects.</li><li>Roll out complete automation for all modules.</li></ul>""", unsafe_allow_html=True))
+    with cols[2]:
+        glass_card(lambda: st.markdown("""<h3 style="color:#f59e0b;">Phase 3: Optimization (4-5 months)</h3><ul style="font-size:0.9rem;"><li>Scale property development operations.</li><li>Fine-tune inter-agent communication.</li><li>Optimize all verticals with AI analytics.</li><li>Deploy advanced quality assurance systems.</li></ul>""", unsafe_allow_html=True))
+
+def benefits_page():
+    st.header("Expected Benefits")
+    cols = st.columns(4)
+    with cols[0]:
+        glass_card(lambda: st.markdown("""<h3 style="color:#22c55e;">Financial</h3><ul style="font-size:0.9rem;"><li>40% revenue increase</li><li>25% property premium</li><li>35% cost savings</li><li>₹12.5 Cr new revenue</li></ul>""", unsafe_allow_html=True))
+    with cols[1]:
+        glass_card(lambda: st.markdown("""<h3 style="color:#0ea5e9;">Operational</h3><ul style="font-size:0.9rem;"><li>Unified planning</li><li>95% case resolution</li><li>40% quality improvement</li><li>45% HR productivity</li></ul>""", unsafe_allow_html=True))
+    with cols[2]:
+        glass_card(lambda: st.markdown("""<h3 style="color:#eab308;">Citizen & Market</h3><ul style="font-size:0.9rem;"><li>Integrated services</li><li>Superior properties</li><li>65% faster case processing</li><li>30% value appreciation</li></ul>""", unsafe_allow_html=True))
+    with cols[3]:
+        glass_card(lambda: st.markdown("""<h3 style="color:#a855f7;">Strategic</h3><ul style="font-size:0.9rem;"><li>Data-driven decisions</li><li>Predictive planning</li><li>Sustainable growth</li><li>Strong brand premium</li></ul>""", unsafe_allow_html=True))
+        
+def summary_page():
+    st.header("A Complete Regulatory & Development Ecosystem")
+    st.markdown("""
+    This comprehensive ecosystem, with its 34 intelligent agents across 6 integrated verticals, transforms MDDA into a fully integrated development and regulatory authority. 
+    It effectively manages approvals, construction, development, enforcement, and judicial functions while maintaining financial sustainability and organizational excellence.
+    """)
+    st.markdown("---")
+    st.subheader("Risk Mitigation")
+    cols = st.columns(3)
+    with cols[0]:
+        st.info("Technical: Integration Testing, Data Consistency Checks, Redundant Backups")
+    with cols[1]:
+        st.info("Operational: Human Oversight, Escalation Procedures, Performance Monitoring")
+    with cols[2]:
+        st.info("Financial: Automated Budget Controls, Complete Audit Trails, Regular Risk Assessment")
+
+# --- Main App Logic ---
+def main():
+    local_css()
+
+    # Sidebar Navigation
+    with st.sidebar:
+        st.title("MDDA System")
+        st.markdown("---")
+        
+        page_options = {
+            "Home": home_page,
+            "System Philosophy": philosophy_page,
+            "Core Functions": core_functions_page,
+            "Agents Overview": agents_overview_page,
+            "Agent Details": agent_details_page,
+            "Case Work Module": casework_module_page,
+            "HR Module": hr_module_page,
+            "Budget Module": budget_module_page,
+            "Inter-Agent Communication": communication_page,
+            "Unified Dashboard": dashboard_page,
+            "Strategic Workflows": workflows_page,
+            "Implementation Strategy": implementation_page,
+            "Expected Benefits": benefits_page,
+            "Summary & Risks": summary_page
+        }
+        
+        selection = st.radio("Go to", list(page_options.keys()))
+        st.markdown("---")
+        st.info("This is an interactive presentation of the MDDA Integrated AI Agent System.")
+
+    # Display the selected page
+    page_function = page_options[selection]
+    page_function()
+
+if __name__ == "__main__":
+    main()
